@@ -1,0 +1,54 @@
+# Example Kubernetes manifest; CI scans it (Dockerfile / IaC stage). Not deployed by CI.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: p3dx-ci-sample
+  namespace: p3dx-ci-sample
+  labels:
+    app: p3dx-ci-sample
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: p3dx-ci-sample
+  template:
+    metadata:
+      labels:
+        app: p3dx-ci-sample
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        runAsNonRoot: true
+        runAsUser: 65532
+        runAsGroup: 65532
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: server
+          image: ghcr.io/mayankgiri90/p3dx-ci-sample:1.0.0
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 65532
+            runAsGroup: 65532
+            capabilities:
+              drop: ["ALL"]
+          resources:
+            requests:
+              cpu: 10m
+              memory: 16Mi
+            limits:
+              cpu: 100m
+              memory: 64Mi
+          readinessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080
+          livenessProbe:
+            httpGet:
+              path: /healthz
+              port: 8080

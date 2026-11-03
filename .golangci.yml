@@ -1,0 +1,17 @@
+# golangci-lint v2 config (Jenkinsfile GOLANGCI_IMAGE golangci/golangci-lint:v2.14.0) - same as p3dx_gov_layer.
+version: "2"
+run:
+  timeout: 5m
+  tests: true
+linters:
+  default: standard
+  enable:
+    - bodyclose       # unclosed HTTP response bodies
+    - errorlint       # wrong error comparisons/wrapping
+    - misspell
+formatters:
+  enable:
+    - gofmt
+issues:
+  max-issues-per-linter: 0
+  max-same-issues: 0
