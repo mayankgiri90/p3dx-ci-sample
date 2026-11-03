@@ -56,7 +56,7 @@ pipeline {
     // Pinned tool images (bump deliberately, never :latest)
     GO_IMAGE        = 'golang:1.26-bookworm'       // matches go.mod / Dockerfile
     GOLANGCI_IMAGE  = 'golangci/golangci-lint:v2.14.0'   // v2: needs Go >= 1.26 support; config is .golangci.yml version 2
-    LINT_BASELINE   = 'BASELINE_SHA'   // first commit of the repo; see Static checks
+    LINT_BASELINE   = 'ad861f8a2c16568d5208dea1fe237a2d580165ff'   // first commit of the repo; see Static checks
     NODE_IMAGE      = 'node:22-alpine'
     PRECOMMIT_IMAGE = 'python:3.12-bookworm'   // needs git (pre-commit); -slim has none
     SEMGREP_IMAGE   = 'semgrep/semgrep:1.140.0'
