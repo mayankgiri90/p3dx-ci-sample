@@ -1,4 +1,5 @@
-# Example Kubernetes manifest; CI scans it (Dockerfile / IaC stage). Not deployed by CI.
+# Kubernetes manifest for the sample; CI scans it (Dockerfile / IaC stage). Applied once by hand
+# (kubectl apply -f deploy/deployment.yaml); after that the Jenkinsfile Deploy stage updates the image.
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -17,6 +18,8 @@ spec:
         app: p3dx-ci-sample
     spec:
       automountServiceAccountToken: false
+      imagePullSecrets:
+        - name: ghcr-pull
       securityContext:
         runAsNonRoot: true
         runAsUser: 65532
@@ -25,7 +28,7 @@ spec:
           type: RuntimeDefault
       containers:
         - name: server
-          image: ghcr.io/mayankgiri90/p3dx-ci-sample:1.0.0
+          image: ghcr.io/mayankgiri90/p3dx-ci-sample:0.0.0-de6eca1
           imagePullPolicy: IfNotPresent
           ports:
             - containerPort: 8080
