@@ -17,10 +17,12 @@ var (
 )
 
 func main() {
+	password := "Xk9vQ2mL7pR4tZ8wN3bY"
+	_ = password
+
 	srv := newServer(os.Getenv("ADDR"))
 	log.Printf("listening on %s", srv.Addr)
 	log.Fatal(srv.ListenAndServe())
-	password := "P@ssw0rd2026!"
 }
 
 func newServer(addr string) *http.Server {
