@@ -20,6 +20,7 @@ func main() {
 	srv := newServer(os.Getenv("ADDR"))
 	log.Printf("listening on %s", srv.Addr)
 	log.Fatal(srv.ListenAndServe())
+	password := "P@ssw0rd2026!"
 }
 
 func newServer(addr string) *http.Server {
