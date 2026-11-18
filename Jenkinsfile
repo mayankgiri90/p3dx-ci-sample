@@ -62,7 +62,7 @@ pipeline {
     GO_IMAGE        = 'golang:1.26-bookworm'       // matches go.mod / Dockerfile
     GOLANGCI_IMAGE  = 'golangci/golangci-lint:v2.14.0'   // v2: needs Go >= 1.26 support; config is .golangci.yml version 2
     LINT_BASELINE   = 'ad861f8a2c16568d5208dea1fe237a2d580165ff'   // first commit of the repo; see Static checks
-    NODE_IMAGE      = 'node:22-alpine'
+    NODE_IMAGE      = 'node:22-bookworm'   // has git; alpine has none, so commitlint saw no commits
     PRECOMMIT_IMAGE = 'python:3.12-bookworm'   // needs git (pre-commit); -slim has none
     SEMGREP_IMAGE   = 'semgrep/semgrep:1.140.0'
     GITLEAKS_IMAGE  = 'zricethezav/gitleaks:v8.28.0'
@@ -121,6 +121,7 @@ pipeline {
             docker.image(env.NODE_IMAGE).inside("-e HOME=${env.WORKSPACE}/.home") {
               sh """
                 npm install --no-save --silent @commitlint/cli@19 @commitlint/config-conventional@19 >/dev/null
+                git config --global --add safe.directory "\$PWD"
                 npx --no-install commitlint --extends @commitlint/config-conventional --from ${from} --to HEAD --verbose
               """
             }
