@@ -25,3 +25,4 @@ go run ./cmd/server          # listens on :8080 (ADDR to change)
 Jenkins job `p3dx-ci-sample` builds `main` and publishes `ghcr.io/mayankgiri90/p3dx-ci-sample`.
 Reports (coverage, Semgrep, gitleaks, Trivy) are in each build's artifacts under `reports/`.
 Commit hygiene test 1.
+Commit hygiene test 2.   
