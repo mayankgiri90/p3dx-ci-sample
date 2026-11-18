@@ -114,7 +114,7 @@ pipeline {
     stage('Commit hygiene') {
       steps {
         script {
-          def from = env.GIT_PREVIOUS_SUCCESSFUL_COMMIT ?: sh(script: 'git rev-parse HEAD~1 2>/dev/null || git rev-list --max-parents=0 HEAD', returnStdout: true).trim()
+          def from = env.GIT_PREVIOUS_COMMIT ?: sh(script: 'git rev-parse HEAD~1 2>/dev/null || git rev-list --max-parents=0 HEAD', returnStdout: true).trim()
           // UNSTABLE for now: the current history is not Conventional Commits yet. Make it blocking
           // (drop catchError) once the team has adopted the format.
           catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE', message: 'Commit messages are not Conventional Commits (feat:, fix:, chore: ...)') {
