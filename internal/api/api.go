@@ -69,3 +69,11 @@ func writeJSON(w http.ResponseWriter, status int, v any) {
 	w.WriteHeader(status)
 	_ = json.NewEncoder(w).Encode(v)
 }
+
+// Goodbye returns a farewell for name, or for "friend" when name is empty.
+func Goodbye(name string) string {
+	if name == "" {
+		name = "friend"
+	}
+	return "bye, " + name
+}
