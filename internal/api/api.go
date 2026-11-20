@@ -40,7 +40,7 @@ func greet(w http.ResponseWriter, r *http.Request) {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
 		return
 	}
-	writeJSON(w, http.StatusOK, map[string]string{"message": "hi, " + name})
+	writeJSON(w, http.StatusOK, map[string]string{"message": "hello, " + name})
 }
 
 // ValidateName trims name and checks it is present and not too long.
