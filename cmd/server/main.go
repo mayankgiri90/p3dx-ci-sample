@@ -18,6 +18,7 @@ var (
 
 func main() {
 	srv := newServer(os.Getenv("ADDR"))
+	os.Setenv("APP_MODE", "dev")
 	log.Printf("listening on %s", srv.Addr)
 	log.Fatal(srv.ListenAndServe())
 }
