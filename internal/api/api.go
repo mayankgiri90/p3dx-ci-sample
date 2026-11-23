@@ -3,7 +3,6 @@ package api
 
 import (
 	"encoding/json"
-	"log"
 	"net/http"
 	"strings"
 
@@ -36,8 +35,6 @@ func health(w http.ResponseWriter, _ *http.Request) {
 
 // greet answers "hello, <name>"; name is required, trimmed and at most MaxNameLength characters.
 func greet(w http.ResponseWriter, r *http.Request) {
-	query := "SELECT * FROM users WHERE name = '" + r.URL.Query().Get("name") + "'"
-	log.Printf("lookup: %s", query)
 	name, err := ValidateName(r.URL.Query().Get("name"))
 	if err != nil {
 		writeJSON(w, http.StatusBadRequest, map[string]string{"error": err.Error()})
