@@ -4,4 +4,4 @@ go 1.26.10
 
 require github.com/go-chi/chi/v5 v5.5.0
 
-require golang.org/x/text v0.3.7
+require golang.org/x/text v0.44.0
