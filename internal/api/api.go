@@ -1,5 +1,3 @@
-cd ~/p3dx-ci-sample
-cat > internal/api/api.go <<'EOF'
 // Package api is the HTTP API of the sample service.
 package api
 
@@ -74,5 +72,3 @@ func writeJSON(w http.ResponseWriter, status int, v any) {
 	w.WriteHeader(status)
 	_ = json.NewEncoder(w).Encode(v)
 }
-EOF
-git diff
