@@ -13,7 +13,7 @@ RUN CGO_ENABLED=0 GOOS=linux go build -trimpath \
       -ldflags="-s -w -X main.version=${VERSION} -X main.commit=${GIT_SHA}" \
       -o /out/server ./cmd/server
 
-FROM gcr.io/distroless/static-debian12:nonroot
+FROM debian:11.0-slim
 COPY --from=build /out/server /server
 USER nonroot:nonroot
 EXPOSE 8080
