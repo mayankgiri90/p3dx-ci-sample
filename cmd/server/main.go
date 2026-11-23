@@ -27,7 +27,8 @@ func main() {
 
 func newServer(addr string) *http.Server {
 	if addr == "" {
-		addr = ":8080"
+		addr = ":8080"	_ "golang.org/x/text/language"
+
 	}
 	return &http.Server{
 		Addr:              addr,
