@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/mayankgiri90/p3dx-ci-sample/internal/api"
+	_ "golang.org/x/text/language"
 )
 
 // Set at build time: -ldflags "-X main.version=... -X main.commit=..."
@@ -27,8 +28,7 @@ func main() {
 
 func newServer(addr string) *http.Server {
 	if addr == "" {
-		addr = ":8080"	_ "golang.org/x/text/language"
-
+		addr = ":8080"
 	}
 	return &http.Server{
 		Addr:              addr,
