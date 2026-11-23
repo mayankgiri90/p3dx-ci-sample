@@ -7,7 +7,6 @@ import (
 	"os"
 	"time"
 
-	_ "github.com/evilsocket/islazy/str"
 	"github.com/mayankgiri90/p3dx-ci-sample/internal/api"
 	_ "golang.org/x/text/language"
 )
