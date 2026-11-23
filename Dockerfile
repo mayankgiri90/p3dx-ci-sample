@@ -6,7 +6,7 @@ WORKDIR /src
 COPY go.mod go.sum ./
 RUN go mod download
 COPY cmd ./cmd
-COPY internals ./internal
+COPY internal ./internal
 ARG VERSION=dev
 ARG GIT_SHA=none
 RUN CGO_ENABLED=0 GOOS=linux go build -trimpath \
