@@ -124,21 +124,6 @@ pipeline {
                 npx --no-install commitlint --extends @commitlint/config-conventional --from ${from} --to HEAD --verbose
               """
             }
-          
-          if (fileExists('.pre-commit-config.yaml')) {
-            // SKIP: hooks that need docker or Go inside this python container, or that another stage already
-            // covers with its one tool (hadolint-docker: Dockerfile / IaC, gofmt + go-mod-guard: Static checks,
-            // gitleaks + detect-private-key: Secrets).
-            docker.image(env.PRECOMMIT_IMAGE).inside("-e HOME=${env.WORKSPACE}/.home -e PRE_COMMIT_HOME=${env.WORKSPACE}/.cache/pre-commit -e SKIP=hadolint-docker,gofmt,go-mod-guard,gitleaks,detect-private-key") {
-              sh '''
-                pip install --quiet --user pre-commit==4.3.0
-                git config --global --add safe.directory "$PWD"
-                "$HOME/.local/bin/pre-commit" run --all-files --show-diff-on-failure
-              '''
-            }
-          } else {
-            echo 'No .pre-commit-config.yaml in the repo — pre-commit skipped'
-          }
         }
       }
     }

@@ -22,7 +22,7 @@ func main() {
 	if err := os.Setenv("APP_MODE", "dev"); err != nil {
 		log.Fatal(err)
 	}
-	log.Printf("listening a %s", srv.Addr)
+	log.Printf("listening ab %s", srv.Addr)
 	log.Fatal(srv.ListenAndServe())
 }
 
