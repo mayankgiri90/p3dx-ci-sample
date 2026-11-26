@@ -117,7 +117,6 @@ pipeline {
           def from = env.GIT_PREVIOUS_COMMIT ?: sh(script: 'git rev-parse HEAD~1 2>/dev/null || git rev-list --max-parents=0 HEAD', returnStdout: true).trim()
           // UNSTABLE for now: the current history is not Conventional Commits yet. Make it blocking
           // (drop catchError) once the team has adopted the format.
-          catchError(buildResult: 'UNSTABLE', stageResult: 'UNSTABLE', message: 'Commit messages are not Conventional Commits (feat:, fix:, chore: ...)') {
             docker.image(env.NODE_IMAGE).inside("-e HOME=${env.WORKSPACE}/.home") {
               sh """
                 npm install --no-save --silent @commitlint/cli@19 @commitlint/config-conventional@19 >/dev/null
@@ -125,7 +124,7 @@ pipeline {
                 npx --no-install commitlint --extends @commitlint/config-conventional --from ${from} --to HEAD --verbose
               """
             }
-          }
+          
           if (fileExists('.pre-commit-config.yaml')) {
             // SKIP: hooks that need docker or Go inside this python container, or that another stage already
             // covers with its one tool (hadolint-docker: Dockerfile / IaC, gofmt + go-mod-guard: Static checks,
